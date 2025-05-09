@@ -5,7 +5,7 @@ import { Task } from "@/interfaces/task";
 
 export default function EditTaskPage() {
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
@@ -17,7 +17,7 @@ export default function EditTaskPage() {
       const task = tasks.find((t: Task) => t.id === id);
       if (task) {
         setTitle(task.title);
-        setDescription(task.description);
+
       }
     }
   }, [id]);
@@ -27,7 +27,7 @@ export default function EditTaskPage() {
     if (storedTasks) {
       const tasks = JSON.parse(storedTasks);
       const updatedTasks = tasks.map((task: Task) =>
-        task.id === id ? { ...task, title, description } : task
+        task.id === id ? { ...task, title } : task
       );
       localStorage.setItem("tasks", JSON.stringify(updatedTasks));
       alert("✅ Tâche mise à jour avec succès !");
@@ -45,18 +45,14 @@ export default function EditTaskPage() {
           value={title} 
           onChange={(e) => setTitle(e.target.value)} 
         />
-        <textarea 
-          className="border border-gray-300 p-3 mb-4 w-full rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500" 
-          placeholder="Description" 
-          value={description} 
-          onChange={(e) => setDescription(e.target.value)} 
-        />
+      
         <button 
           className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg w-full transition-all shadow-md"
           onClick={updateTask}
         >
           ✅ Modifier la tâche
         </button>
+        <button className="bg-gray-500 text-white px-4 py-2 rounded mt-4" onClick={() => router.push("/tasks")}>Retour aux tâches</button>
       </div>
     </div>
   );

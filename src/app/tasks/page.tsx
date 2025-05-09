@@ -48,11 +48,7 @@ export default function TasksPage() {
             {tasks.map((task) => (
               <tr key={task.id} className="border-b hover:bg-gray-50">
                 <td className="p-4">{task.title}</td>
-                <td className="p-4">
-                  <span className={`px-3 py-1 rounded-full text-white text-sm ${task.description ? "bg-green-500" : "bg-red-500"}`}>
-                    {task.description ? "Complété" : "Non complété"}
-                  </span>
-                </td>
+              
                 <td className="p-4 flex space-x-4">
                   <button
                     className="text-blue-600 hover:text-blue-700 transition-all"

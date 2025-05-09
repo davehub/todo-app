@@ -4,14 +4,14 @@ import { useRouter } from "next/navigation";
 
 export default function CreateTaskPage() {
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+
   const router = useRouter();
 
   const createTask = () => {
     const storedTasks = localStorage.getItem("tasks");
     const tasks = storedTasks ? JSON.parse(storedTasks) : [];
-    const newTask = { id: Date.now().toString(), title, description };
-    localStorage.setItem("tasks", JSON.stringify([...tasks, newTask]));
+   
+    localStorage.setItem("tasks", JSON.stringify([...tasks]));
     alert("✅ Tâche créée avec succès !");
     router.push("/tasks");
   };
@@ -26,18 +26,14 @@ export default function CreateTaskPage() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <textarea
-          className="border border-gray-300 p-3 mb-4 w-full rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
+       
         <button
           className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg w-full transition-all shadow-md"
           onClick={createTask}
         >
           ✅ Créer la tâche
         </button>
+        <button className="bg-gray-500 text-white px-4 py-2 rounded mt-4" onClick={() => router.push("/tasks")}>Retour aux tâches</button>
       </div>
     </div>
   );
