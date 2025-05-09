@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+body {
+  @apply bg-cover bg-center bg-no-repeat;
+  background-image: url('/images/background.jpg'); /* chemin relatif à /public */
+}
